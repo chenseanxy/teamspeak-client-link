@@ -1,0 +1,34 @@
+name: Update & Push to CDN
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 0 * * *" # Runs every day
+
+jobs:
+  update:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+
+        - name: Get a client versions for caching
+          run: wget http://files.teamspeak-services.com/releases/client
+        
+        - uses: actions/cache@v2
+          with:
+            path: dist
+            id: cache
+            key: ${{ runner.os }}-${{ hashFiles('client') }}
+
+        - name: Run update script
+          if: steps.cache.outputs.cache-hit != 'true'
+          run: python update.py
+
+        - name: rclone to CDN
+          if: steps.cache.outputs.cache-hit != 'true'
+          uses: wei/rclone@v1
+          env:
+            RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+          with:
+            args: copy dist oss:${{ secrets.RCLONE_DEST }}
