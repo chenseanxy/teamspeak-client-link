@@ -23,7 +23,7 @@ jobs:
 
         - name: Run update script
           if: steps.cache.outputs.cache-hit != 'true'
-          run: python update.py
+          run: python3 update.py
 
         - name: rclone to CDN
           if: steps.cache.outputs.cache-hit != 'true'
