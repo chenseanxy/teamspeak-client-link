@@ -26,6 +26,6 @@ def download(link, dest):
     print(f"Downloaded {link} to {dest}")
 
 download(link_win, "dist/ts-win.exe")
-download(link_mac, "dist/ts-win.dmg")
+download(link_mac, "dist/ts-mac.dmg")
 
 print("Completed")
