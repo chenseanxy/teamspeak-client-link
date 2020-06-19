@@ -24,6 +24,7 @@ jobs:
         - name: Run update script
           if: steps.cache.outputs.cache-hit != 'true'
           run: | 
+            mkdir dist
             pip3 install -r requirements.txt
             python3 update.py
 
