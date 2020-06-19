@@ -33,5 +33,6 @@ jobs:
           uses: wei/rclone@v1
           env:
             RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+            RCLONE_DEST: ${{ secrets.RCLONE_DEST }}
           with:
-            args: copy dist oss:${{ secrets.RCLONE_DEST }}
+            args: copy dist $RCLONE_DEST
