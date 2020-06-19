@@ -25,7 +25,7 @@ def download(link, dest):
     open(dest, "wb").write(r.content)
     print(f"Downloaded {link} to {dest}")
 
-download(link_win, "dest/ts-win.exe")
-download(link_mac, "dest/ts-win.dmg")
+download(link_win, "dist/ts-win.exe")
+download(link_mac, "dist/ts-win.dmg")
 
 print("Completed")
