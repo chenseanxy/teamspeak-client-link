@@ -19,7 +19,7 @@ jobs:
           with:
             path: dist
             id: cache
-            key: ${{ runner.os }}-${{ hashFiles('client') }}
+            key: ${{ runner.os }}-${{ hashFiles('**/*.py|**/*.txt|client') }}
 
         - name: Run update script
           if: steps.cache.outputs.cache-hit != 'true'
